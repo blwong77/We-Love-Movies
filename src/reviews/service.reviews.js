@@ -8,16 +8,15 @@ function readReview(review_id) {
   return knex("reviews").where({ review_id }).first();
 }
 
+async function addCritic(review) {
+  review.critic = await readCritic(review.critic_id);
+  return review;
+}
+
 function listReviewsForMovie(movieId) {
   return knex("reviews")
-    .select("*")
     .where({ movie_id: movieId })
-    .then((reviews) => {
-      return reviews.map(async (review) => {
-        review.critic = await readCritic(review.critic_id);
-        return review;
-      });
-    });
+    .then((reviews) => Promise.all(reviews.map(addCritic)));
 }
 
 function destroy(review_id) {
