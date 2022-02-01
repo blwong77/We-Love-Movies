@@ -4,7 +4,7 @@ async function checkMovie(req, res, next) {
   const { movieId } = req.params;
   const movie = await service.read(movieId);
 
-  if (movie.length !== 0) {
+  if (movie && movie.length !== 0) {
     res.locals.movie = movie[0];
     return next();
   }
