@@ -8,7 +8,7 @@ async function checkReview(req, res, next) {
     res.locals.review = review;
     return next();
   }
-  next({ status: 404, message: "Review does not exist." });
+  next({ status: 404, message: "Review cannot be found." });
 }
 
 module.exports = checkReview;
