@@ -13,6 +13,7 @@ const errorHandler = require("./errors/errorHandler");
  */
 const moviesRouter = require("./movies/router.movies");
 const reviewsRouter = require("./reviews/router.reviews")
+const theatersRouter = require("./theaters/router.theaters")
 
 /**
  * Load the body data
@@ -24,6 +25,7 @@ app.use(express.json())
  */
 app.use("/movies", moviesRouter);
 app.use("/reviews", reviewsRouter);
+app.use("/theaters", theatersRouter);
 
 app.use(notFound);
 app.use(errorHandler);
