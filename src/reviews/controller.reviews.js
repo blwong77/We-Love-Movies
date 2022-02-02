@@ -1,5 +1,5 @@
 const service = require("./service.reviews");
-const checkReview = require("./validation/checkReview")
+const checkReview = require("./validation/checkReview");
 
 async function list(req, res) {
   const data = await service.listReviewsForMovie(req.params.movieId);
@@ -11,7 +11,17 @@ async function destroy(req, res) {
   res.sendStatus(204);
 }
 
+async function update(req, res) {
+  const updatedReview = {
+    ...res.locals.review,
+    ...req.body.data,
+  };
+  const data = await service.update(updatedReview);
+  res.json({ data });
+}
+
 module.exports = {
   list,
-  delete: [ checkReview, destroy ],
+  update: [checkReview, update],
+  delete: [checkReview, destroy],
 };
