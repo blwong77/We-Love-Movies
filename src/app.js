@@ -15,6 +15,11 @@ const moviesRouter = require("./movies/router.movies");
 const reviewsRouter = require("./reviews/router.reviews")
 
 /**
+ * Load the body data
+ */
+app.use(express.json())
+
+/**
  * Pipeline
  */
 app.use("/movies", moviesRouter);
