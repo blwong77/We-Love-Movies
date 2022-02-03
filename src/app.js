@@ -1,6 +1,7 @@
 if (process.env.USER) require("dotenv").config();
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 /**
  * Error Handling Imports
@@ -12,13 +13,14 @@ const errorHandler = require("./errors/errorHandler");
  * Router Imports
  */
 const moviesRouter = require("./movies/router.movies");
-const reviewsRouter = require("./reviews/router.reviews")
-const theatersRouter = require("./theaters/router.theaters")
+const reviewsRouter = require("./reviews/router.reviews");
+const theatersRouter = require("./theaters/router.theaters");
 
 /**
  * Load the body data
  */
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
 /**
  * Pipeline
