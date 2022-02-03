@@ -1,5 +1,6 @@
 const service = require("./service.reviews");
 const checkReview = require("./validation/checkReview");
+const checkMovie = require("../movies/validation/checkMovie");
 
 async function list(req, res) {
   const data = await service.listReviewsForMovie(req.params.movieId);
@@ -21,7 +22,7 @@ async function update(req, res) {
 }
 
 module.exports = {
-  list,
+  list: [checkMovie, list],
   update: [checkReview, update],
   delete: [checkReview, destroy],
 };
